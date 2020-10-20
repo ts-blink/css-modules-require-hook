@@ -21,6 +21,7 @@ const debugFetch = require('debug')('css-modules:fetch');
 const debugSetup = require('debug')('css-modules:setup');
 
 module.exports = function setupHook({
+  transformClassesToSelectors,
   camelCase,
   devMode,
   extensions = '.css',
@@ -124,6 +125,9 @@ module.exports = function setupHook({
 
   const hook = filename => {
     const tokens = fetch(filename, filename);
+    if(typeof tokens === 'object' && transformClassesToSelectors){
+      Object.keys(tokens).forEach(key=>tokens[key]= '.' + tokens[key]);
+    }
     return camelCase ? transformTokens(tokens, camelCase) : tokens;
   };
 
