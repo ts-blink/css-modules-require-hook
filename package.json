@@ -67,6 +67,6 @@
   "scripts": {
     "lint": "eslint src/**/*.js",
     "pretest": "npm run transpile",
-    "test": "NODE_PATH=$(pwd)/test/tokens/node_modules mocha --require test/setup.js --ui tdd test/*/*.js --compilers js:babel-register",
+    "test": "NODE_PATH=$(pwd)/test/tokens/node_modules mocha --require test/setup.js --ui tdd test/*/*.js --compilers js:babel-register"
   }
 }
