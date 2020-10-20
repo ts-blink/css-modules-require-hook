@@ -21,8 +21,7 @@ const debugFetch = require('debug')('css-modules:fetch');
 const debugSetup = require('debug')('css-modules:setup');
 
 module.exports = function setupHook({
-  transformClassesToSelectors,
-  camelCase,
+  transformOpts,
   devMode,
   extensions = '.css',
   ignore,
@@ -125,10 +124,7 @@ module.exports = function setupHook({
 
   const hook = filename => {
     const tokens = fetch(filename, filename);
-    if(typeof tokens === 'object' && transformClassesToSelectors){
-      Object.keys(tokens).forEach(key=>tokens[key]= '.' + tokens[key]);
-    }
-    return camelCase ? transformTokens(tokens, camelCase) : tokens;
+    return transformOpts ? transformTokens(tokens, transformOpts) : tokens;
   };
 
   // @todo add possibility to specify particular config for each extension

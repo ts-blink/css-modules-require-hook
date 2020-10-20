@@ -41,10 +41,15 @@ function camelizeDashes(str) {
 
 /**
  * @param  {object} tokens
- * @param  {boolean|string} camelCase 'dashes|dashesOnly|only'
+ * @param  {object} transformOps
+ * @param  {boolean|string} transformOps.camelCase 'dashes|dashesOnly|only'
+ * @param  {boolean} transformOps.transformClassesToSelectors
  * @return {object}
  */
-function transformTokens(tokens, camelCase) {
+function transformTokens(tokens, {camelCase, transformClassesToSelectors}) {
+  if (typeof tokens === 'object' && transformClassesToSelectors)
+    Object.keys(tokens).forEach(key => tokens[key] = `.${tokens[key]}`);
+
   switch (camelCase) {
   case true:
     return reduce(tokens, camelizeKeys, assign({}, tokens));
@@ -57,6 +62,8 @@ function transformTokens(tokens, camelCase) {
 
   case 'only':
     return reduce(tokens, camelizeOnlyKeys, {});
+  default:
+    // do nothing
   }
 
   return tokens;

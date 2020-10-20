@@ -14,7 +14,7 @@ const {
 
 const rules = {
   // hook
-  camelCase: 'boolean|string',
+  transformOpts: 'object',
   devMode: 'boolean',
   extensions: 'array|string',
   ignore: 'function|regex|string',
