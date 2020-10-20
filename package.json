@@ -1,5 +1,5 @@
 {
-  "name": "css-modules-require-hook",
+  "name": "ts-blink-css-modules-require-hook",
   "version": "4.2.3",
   "description": "A require hook to compile CSS Modules on the fly",
   "main": "src/index.js",
@@ -66,9 +66,7 @@
   },
   "scripts": {
     "lint": "eslint src/**/*.js",
-    "prepublish": "npm run transpile",
     "pretest": "npm run transpile",
     "test": "NODE_PATH=$(pwd)/test/tokens/node_modules mocha --require test/setup.js --ui tdd test/*/*.js --compilers js:babel-register",
-    "transpile": "gulp --cwd . --gulpfile scripts/gulpfile.js transpile"
   }
 }
